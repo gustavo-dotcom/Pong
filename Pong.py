@@ -17,6 +17,7 @@ ball_vel_x, ball_vel_y = 0.7, 0.7                                               
 paddle_width, paddle_height = 20, 120                                                               #Largura e altura das raquetes
 left_paddle_y = right_paddle_y = HEIGHT/2 - paddle_height/2                                         #Posição y das raquetes esquerda e direita
 left_paddle_x, right_paddle_x = 100 - paddle_width/2, WIDTH - (100 - paddle_width/2)                #Posição x das raquetes esquerda e direita
+left_paddle_vel = right_paddle_vel = 0
 
 run = True
 while run:                                                                                          #Loop principal do jogo onde vai acontecer todas as animações e eventos
@@ -24,6 +25,15 @@ while run:                                                                      
     for i in pygame.event.get():                                                                    #Armazena os eventos coletados pelo event.get() na variável i 
         if i.type == pygame.QUIT:                                                                   #Verifica se o usuário precionou o botão de sair
             run = False
+        elif i.type == pygame.KEYDOWN:                                                              #Movimento das raquetes direita e esquerda pelo uso das setas cima/baixo e w/s
+            if i.type == pygame.K_UP:
+                right_paddle_vel = -0.9
+            if i.type == pygame.K_DOWN:
+                right_paddle_vel = 0.9
+            if i.type == pygame.K_w:
+                left_paddle_vel = -0.9
+            if i.type == pygame.K_s:
+                left_paddle_vel = 0.9                    
 
     if ball_y <= 0 + radius or ball_y >= HEIGHT - radius:                                           #Verificando se a bola encosta nas bordas de cima ou baixo e se sim inverte a direção
         ball_vel_y *= -1
