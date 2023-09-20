@@ -54,6 +54,16 @@ while run:                                                                      
     left_paddle_y += left_paddle_vel                                                                #Movimento da raquete esquerda em y
     right_paddle_y += right_paddle_vel                                                              #Movimento da raquete direita em y
 
+    if left_paddle_y >= HEIGHT - paddle_height:                                                     #Verifica se as raquetes estão saindo da tela e se sim volta elas para dentro da janela
+        left_paddle_y = HEIGHT - paddle_height
+    if left_paddle_y <= 0:
+        left_paddle_y = 0
+    if right_paddle_y >= HEIGHT - paddle_height:
+        right_paddle_y = HEIGHT - paddle_height
+    if right_paddle_y <= 0:
+        right_paddle_y = 0
+     
+
     pygame.draw.circle(window, BLUE, (ball_x, ball_y), radius)                                      #Desenha a bola na janela
     pygame.draw.rect(window, RED, (left_paddle_x, left_paddle_y, paddle_width, paddle_height))      #Variáveis da raquete esquerda
     pygame.draw.rect(window, RED, (right_paddle_x, right_paddle_y, paddle_width, paddle_height))    #Variáveis da raquete direita
