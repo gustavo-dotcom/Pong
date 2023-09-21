@@ -35,7 +35,7 @@ while run:                                                                      
             if i.key == pygame.K_s:
                 left_paddle_vel = 0.9
         
-        if i.type == pygame.KEYUP:                                                              #Movimento das raquetes direita e esquerda pelo uso das setas cima/baixo e w/s
+        if i.type == pygame.KEYUP:                                                                  
             if i.key == pygame.K_UP:
                 right_paddle_vel = 0
             if i.key == pygame.K_DOWN:
@@ -65,6 +65,14 @@ while run:                                                                      
     if right_paddle_y <= 0:
         right_paddle_y = 0
 
+    if left_paddle_x <= ball_x <= left_paddle_x + paddle_width:                                     #Verifica a colisão da bola com as raquetes e se sim inverte sua direção
+        if left_paddle_y <= ball_y <= left_paddle_y + paddle_height:
+            ball_x = left_paddle_x + paddle_width
+            ball_vel_x *= -1
+    if right_paddle_x <= ball_x <= right_paddle_x + paddle_width:                                     #Verifica a colisão da bola com as raquetes e se sim inverte sua direção
+        if right_paddle_y <= ball_y <= right_paddle_y + paddle_height:
+            ball_x = right_paddle_x
+            ball_vel_x *= -1
     
 
     ball_x += ball_vel_x                                                                            #Movimento da bola em x
