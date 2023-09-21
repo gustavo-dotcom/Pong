@@ -1,10 +1,14 @@
 import pygame
+import random
 
 pygame.init()
 
 WIDTH, HEIGHT = 1000, 600                                                                           #Tamanho da tela definido para 1000 pixels por 600 pixels
 window = pygame.display.set_mode((WIDTH, HEIGHT))                                                   #Criando uma janela vazia do pygame
 pygame.display.set_caption("Pong")                                                                  #Atribuindo o nome da janela para Pong
+
+direction = [0, 1]                                                                                  #Quantidades de direções que a bola pode iniciar
+angle = [0, 1, 2]                                                                                   #Quantidade de angulos que a bola pode iniciar
 
 BLUE = (0, 0, 255)                                                                                  #Variáveis da cor azul
 RED = (255, 0, 0)                                                                                   #Variáveis da cor vermelha
@@ -49,12 +53,45 @@ while run:                                                                      
     if ball_y <= 0 + radius or ball_y >= HEIGHT - radius:                                           #Verificando se a bola encosta nas bordas de cima ou baixo e se sim inverte a direção
         ball_vel_y *= -1
     if ball_x >= WIDTH - radius:                                                                    #Verifica se a bola encosta na borda direita e se sim define a posição da bola para a inical e inverte a direção
-        ball_x, ball_y = WIDTH/2 - radius, HEIGHT/2 - radius                    
-        ball_vel_x *= -1
-        ball_vel_y *= -1
+        ball_x, ball_y = WIDTH/2 - radius, HEIGHT/2 - radius
+        dir = random.choice(direction)                                                              #Escolhe um número aleatorio de 'direction' e 'angle'
+        ang = random.choice(angle)                    
+        if dir == 0:                                                                                #Direções que a bola poderá seguir
+            if ang == 0:
+                ball_vel_x, ball_vel_y = -1.4, 0.7
+            if ang == 1:
+                ball_vel_x, ball_vel_y = -0.7, 0.7
+            if ang == 2:
+                ball_vel_x, ball_vel_y = -0.7, 1.4
+        
+        if dir == 1:
+            if ang == 0:
+                ball_vel_x, ball_vel_y = 1.4, 0.7
+            if ang == 1:
+                ball_vel_x, ball_vel_y = 0.7, 0.7
+            if ang == 2:
+                ball_vel_x, ball_vel_y = 0.7, 1.4
+        
     if ball_x <= 0 + radius:                                                                        #Verifica se a bola encosta na borda esquerda e se sim define a posição para a inicial e redefine a direção para a inicial também
         ball_x, ball_y = WIDTH/2 - radius, HEIGHT/2 - radius
         ball_vel_x, ball_vel_y = 0.7, 0.7
+        dir = random.choice(direction)                                                              #Escolhe um número aleatorio de 'direction' e 'angle'
+        ang = random.choice(angle)
+        if dir == 0:                                                                                #Direções que a bola poderá seguir
+            if ang == 0:
+                ball_vel_x, ball_vel_y = -1.4, 0.7
+            if ang == 1:
+                ball_vel_x, ball_vel_y = -0.7, 0.7
+            if ang == 2:
+                ball_vel_x, ball_vel_y = -0.7, 1.4
+        
+        if dir == 1:
+            if ang == 0:
+                ball_vel_x, ball_vel_y = 1.4, 0.7
+            if ang == 1:
+                ball_vel_x, ball_vel_y = 0.7, 0.7
+            if ang == 2:
+                ball_vel_x, ball_vel_y = 0.7, 1.4
 
     if left_paddle_y >= HEIGHT - paddle_height:                                                     #Verifica se as raquetes estão saindo da tela e se sim volta elas para dentro da janela
         left_paddle_y = HEIGHT - paddle_height
